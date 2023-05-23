@@ -14,12 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path, include
 from women.views import * #  index, categories
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('women/', include('women.urls')) #  http://10.1.2 01.58:8000/ 
+    path('', include('women.urls')) #  http://10.1.2 01.58:8000/ 
     # просто добавили приложение women, оно независимо от проекта
     # все благодаря добавление файла urls.py в приложение women
 ]
+
+from coolsite import settings
+if settings.DEBUG:  # в режиме откладки когда дебаг тру, мы к маршрутам выше добавляем
+    #  еще доин маршрут для статических данных, графических файлов 
+    # сначала префикс setting.MEDIA_URL, а затем коневую папку где будут находится эти файлы
+    # все это делается только в отладочном режиме
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = pageNotFound

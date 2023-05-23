@@ -124,3 +124,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #  ссылается на папку media, расопложенной 
+  #  в текущем рабочем каталоге проекта BASE_DIR определяет текущую нашего проекта, к ней
+  #  будет добавляться подкаталог media, где будут располагаться все загруенные файлы
+MEDIA_URL = '/media/' #  будет добавлять к url графическим файлам префикс /media
+
